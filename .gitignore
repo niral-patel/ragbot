@@ -6,6 +6,28 @@ __pycache__/
 # C extensions
 *.so
 
+# Local conda environment (never upload this)
+env/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Data & databases
+chroma_db/
+data/
+
+# Logs
+logs/
+
+# VS Code
+.vscode/
+
+# Mac junk
+.DS_Store
+
 # Distribution / packaging
 .Python
 build/
