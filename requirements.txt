@@ -1,8 +1,32 @@
+# RAG Document Chatbot — Direct Dependencies
+# Install with: pip install -r requirements.txt
 
-langchain
-openai
-faiss-cpu
-python-dotenv
-PyPDF2
-langchain-community
-langchain-text-splitters
+# LangChain ecosystem
+langchain==1.2.10
+langchain-community==0.4.1
+langchain-core==1.2.18
+langchain-chroma==1.1.0
+langchain-huggingface==1.2.1
+langchain-ollama==1.0.1
+langchain-text-splitters==1.1.1
+
+# Vector database
+chromadb==1.5.5
+
+# Embeddings
+sentence-transformers==5.2.3
+
+# PDF loading
+pypdf==6.8.0
+
+# LLM (local via Ollama)
+ollama==0.6.1
+
+# UI
+streamlit==1.55.0
+
+# Deep learning backend (for sentence-transformers)
+torch==2.10.0
+
+# Utilities
+python-dotenv==1.2.2
