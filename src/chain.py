@@ -12,7 +12,7 @@ import time
 from src.logger import logger
 from src.exception import CustomException
 from src.ingestor import DataIngestion
-from src.retriever import VectorRetriver
+from src.retriever import VectorRetriever
 
 from langchain_ollama import OllamaLLM
 from langchain_core.prompts import PromptTemplate
@@ -76,7 +76,7 @@ class RAGChain:
         """
         logger.info(f"Initializing RAGChain with model: {model_name}")
         self.ingestor = DataIngestion()  # Handles PDF loading and chunking
-        self.retriever = VectorRetriver()  # Handles vector storage and retrieval
+        self.retriever = VectorRetriever()  # Handles vector storage and retrieval
         self.llm = self._load_llm(model_name)  # LLM for generating answers based on retrieved context
         self.prompt = self._build_prompt()
         logger.info("RAGChain initialized successfully. and it's ready to run!")

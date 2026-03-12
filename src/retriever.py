@@ -31,7 +31,7 @@ EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"  # HuggingFace embedd
 # - Fast enough for real-time search
 # - Used in production by many companies
 
-class VectorRetriver:
+class VectorRetriever:
     '''
     Handles embedding chunks, storing and semantic searching in ChromaDB.
 
@@ -124,8 +124,20 @@ class VectorRetriver:
             # In production you would check document IDs instead
             # For development: always start fresh when re-ingesting
             import shutil
+            import chromadb
             if os.path.exists(CHROMA_PATH):
-                shutil.rmtree(CHROMA_PATH)
+                # Reset the Chroma client first to release file locks 
+                # This is critical on Windows (WinError 32)
+                try:
+                    client = chromadb.PersistentClient(path=CHROMA_PATH)
+                    client.reset()  # Reset the client to release file locks before deleting files
+                    logger.info("Chroma client reset successfully to release file locks.")
+                    del client  # Ensure client is deleted to release any remaining locks
+                
+                except Exception as e:
+                    pass # If reset fails, we will attempt to delete files anyway (may still work if locks are released on process exit)
+                
+                shutil.rmtree(CHROMA_PATH, ignore_errors=True)  # Remove existing ChromaDB files to start fresh
                 logger.info(f"Cleared existing ChromaDB at: {CHROMA_PATH}/")
 
             # ... rest of your code stays exactly the same
@@ -267,7 +279,7 @@ if __name__ == "__main__":
     # python src/retriever.py search  → searches only (no re-ingestion)
     # python src/retriever.py         → does both (default)
     mode = sys.argv[1] if len(sys.argv) > 1 else "both"
-    retriever = VectorRetriver()
+    retriever = VectorRetriever()
     try:
         
         if mode in ("store", "both"):
