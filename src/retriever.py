@@ -15,6 +15,7 @@ from src.exception import CustomException
 
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
+from langchain_core.documents import Document
 
 from chromadb import Client
 
@@ -195,7 +196,7 @@ class VectorRetriver:
         except Exception as e:
             raise CustomException(e, sys)
         
-    def search(self, query: str, top_k: int = 5) -> list:
+    def search(self, query: str, top_k: int = 5) -> list[tuple[Document, float]]:
         '''
         Search for the most relevant chunks in ChromaDB based on a user query.
         Find the k most relevant chunks for a given query.
