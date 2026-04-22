@@ -8,7 +8,7 @@ langchain-core==1.2.18
 langchain-chroma==1.1.0
 langchain-huggingface==1.2.1
 langchain-ollama==1.0.1
-langchain-text-splitters==1.1.1
+langchain-text-splitters==1.1.2
 
 # Vector database
 chromadb==1.5.5
