@@ -17,7 +17,7 @@ chromadb==1.5.5
 sentence-transformers==5.2.3
 
 # PDF loading
-pypdf==6.8.0
+pypdf==6.12.0
 
 # LLM (local via Ollama)
 ollama==0.6.1
